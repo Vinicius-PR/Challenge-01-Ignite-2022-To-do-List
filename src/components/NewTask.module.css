@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 3.37rem;
+  max-width: 46rem;
+  transform: translateY(-50%);
+}
+
+.newTask {
+  flex: 1;
+  padding: 1rem;
+  background-color: var(--gray-500);
+  color: var(--gray-100);
+  border: 1px solid var(--gray-700);
+  border-radius: 8px;
+}
+
+.button {
+  background-color: var(--blue-dark);
+  color: var(--gray-100);
+  border: none;
+  border-radius: 8px;
+  width: 5.6rem;
+  height: inherit;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+
+  transition: background-color 0.1s;
+}
+
+.button:hover {
+  background-color: var(--blue);
+}
+
+@media (max-width: 425px) {
+  .container {
+    flex-direction: column;
+  }
+  .button {
+    padding: 1.5rem 0;
+    margin: 0 auto;
+  }
+}
