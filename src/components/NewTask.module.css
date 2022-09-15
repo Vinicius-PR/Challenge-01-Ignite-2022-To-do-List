@@ -33,7 +33,13 @@
   transition: background-color 0.1s;
 }
 
-.button:hover {
+.button:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.button:hover,
+.button:active {
   background-color: var(--blue);
 }
 

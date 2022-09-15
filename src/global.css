@@ -21,7 +21,6 @@
 
 body {
   background-color: var(--gray-600);
-  padding-bottom: 5rem;
 }
 
 body, input, textarea, button {

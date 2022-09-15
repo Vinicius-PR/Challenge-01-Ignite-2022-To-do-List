@@ -1,19 +1,47 @@
 import {PlusCircle} from 'phosphor-react';
 import styles from './NewTask.module.css';
+import { useState, FormEvent } from 'react';
 
-export function NewTask() {
+import { v4 as uuidv4 } from 'uuid';
+
+import {taskTypes} from '../App';
+
+interface NewTaskProps {
+  handleCreateTask: (task: taskTypes) => void
+}
+
+export function NewTask({handleCreateTask}: NewTaskProps) {
+
+  const [newTask, setNewTask] = useState("");
+
+  function onCreateNewTask(event: FormEvent) {
+    handleCreateTask({
+      id: uuidv4(),
+      content: newTask,
+      isCompleted: false
+    });
+
+    setNewTask("");
+  }
+
   return (
-    <div className={styles.container}>
+    <form className={styles.container}>
 
-      <input 
+      <input
+        onChange={(e) => {setNewTask(e.target.value)}}
+        value = {newTask}
         className={styles.newTask} 
         placeholder='Adicionar uma nova tarefa' 
-        type="text" 
+        type="text"
       />
 
-      <button className={styles.button}>
-        Criar <PlusCircle size={16}/> 
+      <button 
+        disabled={newTask === ""} 
+        className={styles.button} 
+        onClick={onCreateNewTask}>
+        Criar <PlusCircle size={16}
+      /> 
       </button>
-    </div>
+    </form>
   )
 }

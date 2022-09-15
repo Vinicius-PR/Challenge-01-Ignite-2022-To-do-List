@@ -1,44 +1,81 @@
+import { useState, useEffect } from 'react';
 import { Clipboard, Trash } from 'phosphor-react';
 import styles from './Tasks.module.css';
 
-export function Tasks() {
+import { taskTypes } from '../App';
+import { Task } from './Task';
+
+interface TasksProps {
+  tasks: taskTypes[];
+  handleDeleteTask: (id: string) => void;
+  handleChangeisCompleted: (id: string) => void;
+}
+
+export function Tasks({tasks, handleDeleteTask, handleChangeisCompleted } : TasksProps) {
+  const [completedCount, setCompletedCount] = useState(0);
+
+  useEffect(() => {
+    setCompletedCount(
+      tasks.reduce((acc, current) => {
+        if (current.isCompleted === true) {
+          return acc + 1
+        } else {
+          return acc
+        }
+      }, 0)
+    );
+  }, [tasks])
+
   return (
     <section className={styles.container}>
       <header className={styles.header}>
 
         <div className={styles.created}>
-          <strong>Tarefas criadas</strong><span>0</span>
+          <strong>Tarefas criadas</strong><span>{tasks.length}</span>
         </div>
 
         <div className={styles.concluded}>
-          <strong>Concluídas</strong><span>0</span>
+          <strong>Concluídas</strong>
+            {
+              (completedCount === 0) ? (
+                <span>0</span>
+              ) : (
+                <span>
+                  {completedCount} de {tasks.length}
+                </span>
+              )
+            }
         </div>
       </header>
 
-
-      {/* <div className={`${styles.content} ${styles.empty}`}>
-        <Clipboard size={56} />
-        <strong>Você ainda não tem tarefas cadastradas</strong>
-        <span>Crie tarefas e organize seus itens a fazer</span>
-      </div> */}
-
-
-      <div className={styles.content}>
-        
-        <div className={styles.task}>
-          <input type="checkbox" id='task'/>
-          <label htmlFor='task'>Lorem .</label>
-          <Trash size={22}/>
-        </div>
-
-        <div className={`${styles.task} ${styles.done}`}>
-          <input type="checkbox" id='task1'/>
-          <label htmlFor='task1'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iste sunt, amet laborum suscipit facilis nam earum quaerat rem laboriosam nulla! Minus corporis tempore reprehenderit optio eligendi a, possimus quod nulla.</label>
-          <Trash size={22}/>
-        </div>
-
-      </div>
-
+      {
+        (tasks.length === 0) ? (
+          <div className={`${styles.content} ${styles.empty}`}>
+            <Clipboard size={56} />
+            <strong>Você ainda não tem tarefas cadastradas</strong>
+            <span>Crie tarefas e organize seus itens a fazer</span>
+          </div>
+        ) : (
+          <div className={styles.content}>
+            
+            {
+              tasks.map((task) => {
+                return (
+                  <Task
+                    key={task.id}
+                    id={task.id} 
+                    content={task.content} 
+                    isCompleted= {task.isCompleted}
+                    handleDeleteTask={handleDeleteTask}
+                    handleChangeisCompleted={handleChangeisCompleted}
+                  />
+                )
+              })
+            }
+          </div>
+        )
+      }
+      
     </section>
   )
 }
