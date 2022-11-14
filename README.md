@@ -6,7 +6,7 @@ The application is a **todo List** that have the following functionalities:
 * Add a new task
 * Mark the task as done or undone
 * Remove a task from the list
-* show a progess of task completion
+* show a progress of task completion
 
 # Languages used
 
