@@ -7,6 +7,7 @@ The application is a **todo List** that have the following functionalities:
 * Mark the task as done or undone
 * Remove a task from the list
 * show a progress of task completion
+* Save the data using localStorage
 
 # Languages used
 
