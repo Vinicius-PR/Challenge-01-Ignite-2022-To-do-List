@@ -1,6 +1,7 @@
+// Imported styles this way so it work fine at vercel.
+import styles from '../components/Tasks.module.css'
 import { useState, useEffect } from 'react';
 import { Clipboard, Trash } from 'phosphor-react';
-import styles from './Tasks.module.css';
 
 import { taskTypes } from '../App';
 import { Task } from './Task';
@@ -11,7 +12,7 @@ interface TasksProps {
   handleChangeisCompleted: (id: string) => void;
 }
 
-export function Tasks({tasks, handleDeleteTask, handleChangeisCompleted } : TasksProps) {
+export function Tasks({ tasks, handleDeleteTask, handleChangeisCompleted }: TasksProps) {
   const [completedCount, setCompletedCount] = useState(0);
 
   useEffect(() => {
@@ -36,15 +37,15 @@ export function Tasks({tasks, handleDeleteTask, handleChangeisCompleted } : Task
 
         <div className={styles.concluded}>
           <strong>Concluídas</strong>
-            {
-              (completedCount === 0) ? (
-                <span>0</span>
-              ) : (
-                <span>
-                  {completedCount} de {tasks.length}
-                </span>
-              )
-            }
+          {
+            (completedCount === 0) ? (
+              <span>0</span>
+            ) : (
+              <span>
+                {completedCount} de {tasks.length}
+              </span>
+            )
+          }
         </div>
       </header>
 
@@ -57,15 +58,15 @@ export function Tasks({tasks, handleDeleteTask, handleChangeisCompleted } : Task
           </div>
         ) : (
           <div className={styles.content}>
-            
+
             {
               tasks.map((task) => {
                 return (
                   <Task
                     key={task.id}
-                    id={task.id} 
-                    content={task.content} 
-                    isCompleted= {task.isCompleted}
+                    id={task.id}
+                    content={task.content}
+                    isCompleted={task.isCompleted}
                     handleDeleteTask={handleDeleteTask}
                     handleChangeisCompleted={handleChangeisCompleted}
                   />
@@ -75,7 +76,7 @@ export function Tasks({tasks, handleDeleteTask, handleChangeisCompleted } : Task
           </div>
         )
       }
-      
+
     </section>
   )
 }

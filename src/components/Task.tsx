@@ -1,4 +1,6 @@
 import { Trash } from 'phosphor-react';
+
+// Imported styles this way so it work fine at vercel.
 import styles from "../components/task.module.css"
 
 interface taskProps {

@@ -1,4 +1,5 @@
-import styles from './Header.module.css';
+// Imported styles this way so it work fine at vercel.
+import styles from '../components/Header.module.css';
 import naveImg from '../assets/nave.svg';
 export function Header() {
   return (

@@ -1,16 +1,17 @@
-import {PlusCircle} from 'phosphor-react';
-import styles from './NewTask.module.css';
+// Imported styles this way so it work fine at vercel.
+import styles from '../components/NewTask.module.css'
+import { PlusCircle } from 'phosphor-react';
 import { useState, FormEvent } from 'react';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import {taskTypes} from '../App';
+import { taskTypes } from '../App';
 
 interface NewTaskProps {
   handleCreateTask: (task: taskTypes) => void
 }
 
-export function NewTask({handleCreateTask}: NewTaskProps) {
+export function NewTask({ handleCreateTask }: NewTaskProps) {
 
   const [newTask, setNewTask] = useState("");
 
@@ -28,19 +29,19 @@ export function NewTask({handleCreateTask}: NewTaskProps) {
     <form className={styles.container}>
 
       <input
-        onChange={(e) => {setNewTask(e.target.value)}}
-        value = {newTask}
-        className={styles.newTask} 
-        placeholder='Adicionar uma nova tarefa' 
+        onChange={(e) => { setNewTask(e.target.value) }}
+        value={newTask}
+        className={styles.newTask}
+        placeholder='Adicionar uma nova tarefa'
         type="text"
       />
 
-      <button 
-        disabled={newTask === ""} 
-        className={styles.button} 
+      <button
+        disabled={newTask === ""}
+        className={styles.button}
         onClick={onCreateNewTask}>
         Criar <PlusCircle size={16}
-      /> 
+        />
       </button>
     </form>
   )
