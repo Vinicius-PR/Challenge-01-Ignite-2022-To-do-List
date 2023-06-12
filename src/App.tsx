@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Header } from './components/Header'
 import { NewTask } from './components/NewTask'
 
@@ -12,8 +12,16 @@ export interface taskTypes {
 }
 
 function App() {
+  const tasksJsonData = localStorage.getItem('todo-list/tasks')
+  let inicialTasksData = tasksJsonData ? JSON.parse(tasksJsonData) : []
 
-  const [tasks, setTasks] = useState<taskTypes[]>([]);
+  const [tasks, setTasks] = useState<taskTypes[]>(inicialTasksData);
+
+  // To update the localStorage
+  useEffect(() => {
+    const tasksJson = JSON.stringify(tasks)
+    localStorage.setItem('todo-list/tasks', tasksJson)
+  }, [tasks])
 
   function handleCreateTask(newTask: taskTypes) {
     setTasks([...tasks, newTask]);
@@ -44,12 +52,12 @@ function App() {
 
   return (
     <>
-      <Header/>
+      <Header />
       <div className={styles.wrapper}>
         <NewTask handleCreateTask={handleCreateTask} />
-        <Tasks 
+        <Tasks
           tasks={tasks}
-          handleDeleteTask={handleDeleteTask} 
+          handleDeleteTask={handleDeleteTask}
           handleChangeisCompleted={handleChangeisCompleted}
         />
       </div>
